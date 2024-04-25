@@ -1,39 +1,28 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# stream_taker
+dart Stream.take分多次取数据，
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+针对Stream.take无法分多次取数据的问题，单独封装一个类确保只listen一次，take几个就只消费几个，
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```dart
+dart pub add stream_taker
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
+[stream_taker_test.dart](./test/stream_taker_test.dart)  
 ```dart
-const like = 'sample';
+    streamSplit = StreamTaker(createStream(5));
+    list = await streamSplit.take(1).toList();
+    expect([0], list);
+    await Future.delayed(Duration(seconds: 1));
+    list = await streamSplit.take(2).toList();
+    expect([1, 2], list);
+    await Future.delayed(Duration(seconds: 1));
+    list = await streamSplit.take(3).toList();
+    // 只剩两个，就只得到两个，
+    expect([3, 4], list);
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.

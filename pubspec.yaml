@@ -1,7 +1,7 @@
 name: stream_taker
-description: A starting point for Dart libraries or applications.
+description: stream.take multi times,
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/AoEiuV020/stream_taker
 
 environment:
   sdk: ^3.3.3
